@@ -14,6 +14,7 @@
 
 ```bash
    wget https://raw.githubusercontent.com/0x01sky/fedora-pkg-installer/main/src/installer.py
+   python3 installer.py
 ```
 
  **Enjoy : )**
