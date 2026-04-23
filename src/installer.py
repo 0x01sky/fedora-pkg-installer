@@ -12,7 +12,8 @@ Packages = [
     "discord", "steam", "ghostty", "ani-cli", "krita", "gimp",
     "inkscape", "vlc", "rustup", "cargo", "distrobox", "micro",
     "acpi", "kubernetes", "podman", "nginx", "sqlite", "python3-pycryptodomex",
-    "python3-sympy"
+    "python3-sympy", "systemd-devel", "gem", "lsd", "duf", "tldr",
+    "git-credential-libsecret", "automake", "valgrind"
 ]
 
 def repo_vscode():
@@ -63,6 +64,15 @@ def onlyoffice_rpm():
     
     sb.run(["curl", "-L", rpm_link, "-o", onlyoffice_path], check=True)
     sb.run(["sudo", "dnf", "install", onlyoffice_path, "-y"], check=True)
+
+def flathub_repo():
+    lg.info("(+) Adding flathub repository...")
+    flathub_repo = \
+    "https://dl.flathub.org/repo/flathub.flatpakrepo"
+
+    sb.run(["flatpak", "remote-add", "--if-not-exists", "flathub", flathub_repo], check=True)
+    lg.info("(+) Added Flathub Repository!")
+
 
 def install_packages():
     lg.info("(+) Updating Repositories...")
