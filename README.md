@@ -1,7 +1,19 @@
-# [!] Fedora Package Installer
+# [*] Fedora Package Installer
 
-- This Fedora Installer Script was mainly made for my daily usage, as im lazy to install packages manually, and anyone is free to use it as they like !
+- This Fedora Installer Script was mainly made for my daily usage, as im lazy to install all packages and dependencies that i need manually, and anyone is free to use it as they like !
 
-- *Note:* If you encounter a bug or you want to suggest an improvement for the code, make sure to open an issue in the respository !
+## Installation :
+
+- Method 1:
+
+```bash
+    git clone https://github.com/0x01sky/fedora-pkg-installer
+    python3 fedora-pkg-installer/src/installer.py
+```
+- Method 2:
+
+```bash
+   wget https://raw.githubusercontent.com/0x01sky/fedora-pkg-installer/main/src/installer.py
+```
 
  **Enjoy : )**
