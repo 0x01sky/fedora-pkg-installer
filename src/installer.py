@@ -7,7 +7,7 @@ lg = logging.getLogger(__name__)
 
 Packages = [
     "python3-spyder", "golang", "clang", "VirtualBox",
-    "fastfetch", "cpufetch", "obs-studio", "vscode",
+    "fastfetch", "cpufetch", "obs-studio", "code",
     "librewolf", "zig", "gh", "telegram-desktop", "signal-desktop" "yt-dlp"
     "discord", "steam", "ghostty", "ani-cli", "krita", "gimp",
     "inkscape", "signal", "vlc", "rustup", "cargo", "distrobox", "micro",
