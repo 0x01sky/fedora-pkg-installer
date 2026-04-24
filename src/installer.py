@@ -10,7 +10,7 @@ Packages = [
     "fastfetch", "cpufetch", "obs-studio", "code",
     "librewolf", "zig", "gh", "telegram-desktop", "signal-desktop", "yt-dlp",
     "discord", "steam", "ghostty", "ani-cli", "krita", "gimp",
-    "inkscape", "signal", "vlc", "rustup", "cargo", "distrobox", "micro",
+    "inkscape", "vlc", "rustup", "cargo", "distrobox", "micro",
     "acpi", "kubernetes", "podman", "nginx", "sqlite", "python3-pycryptodomex",
     "python3-sympy", "systemd-devel", "gem", "lsd", "duf", "tldr",
     "git-credential-libsecret", "valgrind", "cava", "tmux", "poetry",
@@ -125,6 +125,7 @@ def main():
     repo_librewolf()
     rpm_fusion()
     copr_repos()
+    signal_repo()
     onlyoffice_rpm()
     install_packages()
 
