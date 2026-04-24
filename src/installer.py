@@ -13,7 +13,7 @@ Packages = [
     "inkscape", "vlc", "rustup", "cargo", "distrobox", "micro",
     "acpi", "kubernetes", "podman", "nginx", "sqlite", "python3-pycryptodomex",
     "python3-sympy", "systemd-devel", "gem", "lsd", "duf", "tldr",
-    "git-credential-libsecret", "automake", "valgrind"
+    "git-credential-libsecret", "automake", "valgrind", "cava"
 ]
 
 def repo_vscode():
