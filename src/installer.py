@@ -22,7 +22,8 @@ Packages = [
     "acpi", "kubernetes", "podman", "nginx", "sqlite",
     "python3-pycryptodomex", "python3-sympy", "systemd-devel",
     "gem", "lsd", "duf", "tldr", "git-credential-libsecret",
-    "valgrind", "cava", "tmux", "poetry", "fd", "strace", "wireshark"
+    "valgrind", "cava", "tmux", "poetry", "fd", "strace", "wireshark",
+    "topgrade"
 ]
 
 def is_installed(pkg):
@@ -81,12 +82,13 @@ def rpm_fusion():
 def copr_repos():
     lg.info("(+) Enabling COPR repos...")
 
-    if repo_exists("ghostty") and repo_exists("ani-cli"):
+    if repo_exists("ghostty") and repo_exists("ani-cli") and repo_exists("topgrade"):
         lg.info("(+) COPR repos already enabled")
         return
 
     run(["sudo", "dnf", "copr", "enable", "scottames/ghostty", "-y"])
     run(["sudo", "dnf", "copr", "enable", "derisis13/ani-cli", "-y"])
+    run(["sudo", "dnf", "copr", "enable", "lilay/topgrade", "-y"])
 
 
 def signal_repo():
@@ -100,7 +102,6 @@ def signal_repo():
         return
 
     run(["sudo", "dnf", "config-manager", "addrepo", f"--from-repofile={repo}"])
-
 
 def flathub_repo():
     lg.info("(+) Adding Flathub...")
