@@ -23,7 +23,7 @@ Packages = [
     "python3-pycryptodomex", "python3-sympy", "systemd-devel",
     "gem", "lsd", "duf", "tldr", "git-credential-libsecret",
     "valgrind", "cava", "tmux", "poetry", "fd", "strace", "wireshark",
-    "topgrade"
+    "topgrade", ""
 ]
 
 def is_installed(pkg):
@@ -96,8 +96,12 @@ def signal_repo():
 
     version = run(["rpm", "-E", "%fedora"]).stdout.strip()
     repo = f"https://download.opensuse.org/repositories/network:/im:/signal/Fedora_{version}/network:im:signal.repo"
+    
+    if (run(["rpm", "-E", "%fedora"]) != 42) or (run(["rpm", "-E", "%fedora"]) != 43):
+        lg.info("(+) Version mismatch, ignoring Signal Repo !")
+        return
 
-    if "network_im_signal" in run(["dnf", "repolist"]).stdout:
+    if ("network_im_signal" in run(["dnf", "repolist"]).stdout):
         lg.info("(+) Signal repo already exists")
         return
 
