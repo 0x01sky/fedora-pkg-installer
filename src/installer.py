@@ -16,14 +16,13 @@ def run(cmd, check=True):
 Packages = [
     "python3-spyder", "golang", "clang", "VirtualBox",
     "fastfetch", "cpufetch", "obs-studio", "code",
-    "librewolf", "zig", "gh", "telegram-desktop", "signal-desktop", "yt-dlp",
+    "helium", "zig", "gh", "telegram-desktop", "yt-dlp",
     "discord", "steam", "ghostty", "ani-cli", "krita", "gimp",
     "inkscape", "vlc", "rustup", "cargo", "distrobox", "micro",
     "acpi", "kubernetes", "podman", "nginx", "sqlite",
     "python3-pycryptodomex", "python3-sympy", "systemd-devel",
     "gem", "lsd", "duf", "tldr", "git-credential-libsecret",
-    "valgrind", "cava", "tmux", "poetry", "fd", "strace", "wireshark",
-    "topgrade", ""
+    "valgrind", "cava", "tmux", "poetry", "fd", "strace", "wireshark", "topgrade"
 ]
 
 def is_installed(pkg):
@@ -53,20 +52,6 @@ gpgkey=https://packages.microsoft.com/keys/microsoft.asc
     p = sb.Popen(["sudo", "tee", "/etc/yum.repos.d/vscode.repo"], stdin=sb.PIPE, text=True)
     p.communicate(repo_content)
 
-
-def repo_librewolf():
-    lg.info("(+) Checking Librewolf repo...")
-
-    if repo_exists("librewolf"):
-        lg.info("(+) Librewolf repo already exists")
-        return
-
-    run([
-        "sudo", "dnf", "config-manager",
-        "addrepo", "--from-repofile=https://repo.librewolf.net/librewolf.repo"
-    ])
-
-
 def rpm_fusion():
     lg.info("(+) Installing RPM Fusion...")
 
@@ -82,30 +67,14 @@ def rpm_fusion():
 def copr_repos():
     lg.info("(+) Enabling COPR repos...")
 
-    if repo_exists("ghostty") and repo_exists("ani-cli") and repo_exists("topgrade"):
+    if repo_exists("ghostty") and repo_exists("ani-cli") and repo_exists("topgrade") and repo_exists("helium"):
         lg.info("(+) COPR repos already enabled")
         return
 
     run(["sudo", "dnf", "copr", "enable", "scottames/ghostty", "-y"])
     run(["sudo", "dnf", "copr", "enable", "derisis13/ani-cli", "-y"])
     run(["sudo", "dnf", "copr", "enable", "lilay/topgrade", "-y"])
-
-
-def signal_repo():
-    lg.info("(+) Adding Signal repo...")
-
-    version = run(["rpm", "-E", "%fedora"]).stdout.strip()
-    repo = f"https://download.opensuse.org/repositories/network:/im:/signal/Fedora_{version}/network:im:signal.repo"
-    
-    if (run(["rpm", "-E", "%fedora"]) != 42) or (run(["rpm", "-E", "%fedora"]) != 43):
-        lg.info("(+) Version mismatch, ignoring Signal Repo !")
-        return
-
-    if ("network_im_signal" in run(["dnf", "repolist"]).stdout):
-        lg.info("(+) Signal repo already exists")
-        return
-
-    run(["sudo", "dnf", "config-manager", "addrepo", f"--from-repofile={repo}"])
+    run(["sudo", "dnf", "copr", "enable", "imput/helium", "-y"])
 
 def flathub_repo():
     lg.info("(+) Adding Flathub...")
@@ -146,10 +115,8 @@ def install_packages():
 def main():
     steps = [
         repo_vscode,
-        repo_librewolf,
         rpm_fusion,
         copr_repos,
-        signal_repo,
         flathub_repo,
         onlyoffice_rpm,
         install_packages
